@@ -1,0 +1,11 @@
+1.Add basic support for EFM32-STK3300. Ugly it is. But it works!
+  +clock.c rtimer-arch.c leds-arch.c button-sensor.c
+  +led-test.c button-test.c
+  >cd examples/stk3300
+  >make clean
+  >make
+  >arm-none-eabi-objcopy -O binary <led-test|button-test>.stk3300 out.bin
+  >JLinkExe -device EFM32TG840F32
+    >loadbin out.bin 0
+    >q
+  #Push reset button

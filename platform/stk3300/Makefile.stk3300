@@ -1,0 +1,22 @@
+CONTIKI_NO_NET=1
+
+CONTIKI_TARGET_DIRS = . dev
+# Master clock frequency
+MCK=32000000
+CFLAGS+=-DAUTOSTART_ENABLE
+
+ifndef CONTIKI_TARGET_MAIN
+CONTIKI_TARGET_MAIN = contiki-main.c
+endif
+
+SENSORS += stk3300-sensors.c
+CONTIKI_TARGET_SOURCEFILES += $(SENSORS) $(STEPPER_ROBOT) \
+ $(CODEPROP_SOURCES) $(CONTIKI_TARGET_MAIN)
+
+CLEAN += *.stk3300 JLink.log
+# include $(CONTIKI)/platform/$(TARGET)/apps/Makefile.apps
+
+include $(CONTIKI)/cpu/arm/efm32/Makefile.efm32
+
+#contiki-$(TARGET).a: ${addprefix $(OBJECTDIR)/,symbols.o}
+
